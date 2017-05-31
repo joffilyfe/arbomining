@@ -5,8 +5,9 @@ library(lubridate)
 library(stringr)
 library(dplyr)
 
+
 # Carregando dataset
-dengue_dataset = read.csv("~/IFPB/ArboMining/datasets/casos-dengue2015.csv", sep = ";")
+dengue_dataset = read.csv("~/Pessoal/tcc/casos-dengue2016.csv", sep = ";")
 
 # Fatorando o dataset em 10 linhas
 three_thousand <- dengue_dataset
@@ -33,13 +34,21 @@ sem_febre <- dengue_dataset %>%
 # qplot(no_bairro_residencia, data = three_thousand)
 # data_clean$no_bairro_residencia
 
+# Filtrando as tuplas que possuem o bairro preenchico
 com_bairros <- data_clean %>%
   filter(!grepl("^$", no_bairro_residencia))
 
+# Ordenando os bairros pelo número de agrupamento
 bairros <- count(com_bairros, no_bairro_residencia, sort = TRUE)
 
+# Filtrando os dez primeiros colocados
 bairros <- bairros[1:10,]
 
+# Exibindo com o ggplot
 ggplot(data = bairros) + geom_point(data = bairros, aes(x = 1:10, y = n, col=bairros$no_bairro_residencia))
 
-qplot(data = bairros, x = no_bairro_residencia, y = n, geom = "bar")
+# Exibindo com o qplot
+qplot(data = bairros, x = no_bairro_residencia, weight = n, geom = "bar", fill = no_bairro_residencia)
+
+
+

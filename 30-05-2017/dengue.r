@@ -7,7 +7,8 @@ library(dplyr)
 
 
 # Carregando dataset
-dengue_dataset = read.csv("~/Pessoal/tcc/casos-dengue2016.csv", sep = ";")
+dengue_dataset <- read.csv("~/Pessoal/tcc/casos-dengue2016.csv",
+                           sep = ";")
 
 # Fatorando o dataset em 10 linhas
 three_thousand <- dengue_dataset
@@ -50,5 +51,10 @@ ggplot(data = bairros) + geom_point(data = bairros, aes(x = 1:10, y = n, col=bai
 # Exibindo com o qplot
 qplot(data = bairros, x = no_bairro_residencia, weight = n, geom = "bar", fill = no_bairro_residencia)
 
+
+ggplot(data = bairros) +
+  geom_bar(data = bairros,
+           aes(x = reorder(no_bairro_residencia, -n),
+               weight = n, fill=bairros$no_bairro_residencia))
 
 

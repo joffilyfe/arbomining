@@ -33,7 +33,6 @@ ggplot(data = quantidade_por_raca) +
   xlab("Raças") +
   ylab("Quantidade")
 
-
 # Fazendo plot com barras
 qplot(data = quantidade_por_raca, x = raca,
       weight = n, fill = raca, geom = "bar",
